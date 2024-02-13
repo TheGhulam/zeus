@@ -1,12 +1,10 @@
 "use client";
-
-import { Inter } from "next/font/google";
-import { Canvas } from "@react-three/fiber";
-
 import ZeusModel from "@/components/ZeusModel";
 
+import { Canvas } from "@react-three/fiber";
+import { Html, useProgress } from "@react-three/drei";
 import { skewRevealText } from "@/utils/gsap";
-import { useLayoutEffect, useRef, useEffect } from "react";
+import { useLayoutEffect, useRef, useEffect, Suspense } from "react";
 import { useScroll } from "framer-motion";
 
 export default function Home() {
@@ -23,6 +21,19 @@ export default function Home() {
     skewRevealText(textRefFour);
   }, []);
 
+  function Loader() {
+    const { progress } = useProgress();
+    return (
+      <Html center>
+        <div className="w-full h-full flex justify-center items-center">
+          <div className="w-20 h-20 bg-white rounded-full flex justify-center items-center">
+            <h1 className="text-3xl font-bold">{progress} %</h1>
+          </div>
+        </div>
+      </Html>
+    );
+  }
+
   return (
     <main className="relative">
       <style jsx>{`
@@ -36,13 +47,15 @@ export default function Home() {
       <div className="h-full w-full fixed top-0 left-0 ml-64 bg-hero-gradient bg-right bg-no-repeat bg-cover bg-blend-normal z-0">
         <Canvas>
           {/* <ambientLight intensity={0.03} /> */}
-          <ZeusModel
-            scale={0.1}
-            position={[0, -2, 0]}
-            rotation={[0, 5, 0]}
-            scrollY={scrollY}
-            scrollYProgress={scrollYProgress}
-          />
+          <Suspense fallback={<Loader />}>
+            <ZeusModel
+              scale={0.1}
+              position={[0, -2, 0]}
+              rotation={[0, 5, 0]}
+              scrollY={scrollY}
+              scrollYProgress={scrollYProgress}
+            />
+          </Suspense>
         </Canvas>
       </div>
       <div className="max-w-7xl relative m-auto text-white  z-2">
