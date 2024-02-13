@@ -9,10 +9,7 @@ function Navigation() {
         <div className="w-full pl-10">
           <ul className="flex w-full justify-around border-b-[1px] border-[#583922] pb-3 ">
             <li>Home</li>
-            <li>Facts</li>
-            <li>Content</li>
             <li>Design</li>
-            <li>Love</li>
           </ul>
         </div>
       </div>
