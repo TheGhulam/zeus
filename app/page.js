@@ -53,7 +53,7 @@ export default function Home() {
           viewport={{ once: true, amount: 0.2, margin: "800px" }}
         >
           <div className="overflow-hidden">
-            <h1 className="text-8xl font-bold font-headline">
+            <h1 className="text-2xl font-bold font-headline">
               Zeus the
               <br /> Greek God
             </h1>
